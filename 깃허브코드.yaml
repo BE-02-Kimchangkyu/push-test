@@ -1,0 +1,61 @@
+1. 깃허브에서 프로필 settings - Developer setting 클릭 - 1~4번 순서대로 클릭 - 토큰생성완료
+
+2. SoulTree설치 - VSC 기본터미널을 Git Bash로 설정
+
+3. Git은 지역(Local), 전역(Global), 시스템(System) 3가지 범위로 설정이 가능합니다.
+  지역(Local) 범위로 설정하면 특정 저장소(Repository)로 한정되고
+  전역(Global) 범위로 설정하면 모든 저장소로 한정
+   
+   git config --global user.name '원하는이름' #전역에 사용될 이름 설정
+   git config --global user.email '이메일주소' #전역에 사용될 이멜
+   git config --global user.name or email #설정확인
+   git config --global --unset user.name or email # 삭제
+   git config --global init.defaultBranch mail #Git의 기본브랜치를 master > main으로 변경
+   git init #로컬 저장소 생성
+   init이후 폴더에 숨겨진 .git 폴더 생성. 단축키 cmd + shft + .
+
+4. .gitingnore 파일생성후 관리를 원하지 않는 파일을 추가하면 git에서 관리하지 않게 됨
+    git status // git log // git log --oneline
+    git add . # Untracked상태인 모든 파일을 Staged로 올리는 명령어
+    git add (파일명) # Untracked상태인 파일 중 특정 파일만 Staged로 올리는 명령어
+    git commit -m "first commit" # -m과 커밋 메시지를 입력하면  
+    git commit # git commit 명령어만 입력 시 Vim 모드로 진입
+  ✨Vim은 브램 물레나르(Bram Moolenaar)가 만든 명령어 라인 사용자 인터페이스(CUI) 기반의  vi 호환 텍스트 편집기
+
+5. reset(혼자만 사용하는 브랜치인 경우)을 사용해 커밋 되돌리기 // 거의 revert로 되돌린다.
+   git log #log 정보 확인 후 커밋 해시 확인 및 복사
+   git reset --hard [커밋 해시] #복사한 커밋 해시를 이용해 reset 옵션으로는 hard를 사용 
+   git log #다시 한번 log를 활용해 정상적으로 reset이 되었는지 확인
+
+6. revert (원하는 시점의 커밋된 내용만 되돌림, 되돌린 내용에 대해 새로운 커밋을 생성함)
+   git log #log 정보 확인 후 커밋 해시 확인 및 복사
+   git revert [커밋 해시] #복사한 커밋 해시를 이용해 reset 옵션으로는 hard를 사용 
+   git log #다시 한번 log를 활용해 정상적으로 reset이 되었는지 확인
+
+7. 브랜치 생성 / 이동 / 삭제하기 / 이름 바꾸기
+   git branch oz # 브랜치 생성
+   git branch # 브랜치 목록 확인
+   git switch oz # 생성한 Branch로 이동
+   git switch -c oz # 브랜치 생성과 동시에 이동하기
+   git branch -D oz # 브랜치 삭제하기
+   git branch -m oz oz_new # 브랜치 이름 바꾸기
+
+8. 브랜치의 이력을 남기는지 협업때 좋은(merge), 아니면 이력을 남기지 않고 합치는지(rebase)
+   - Merge를 진행하기 위해서는 main branch로 이동 후 진행
+   git switch [이동을 원하는 branch] #원하는 branch로 이동하는 명령어
+   git merge [합치고 싶은 branch] #main에 branch의 커밋 이력을 합칠때 사용하는 명령어
+   - Rebase는 merge와는 다르게 합치고 싶은 브랜치에서 Rebase를 진행 후 main에서 merge를 진행
+   git switch [이동을 원하는 branch] #합치려는 branch로 이동하는 명령어
+   git rebase main (develop) #합치려는 branch의 커밋 이력을 합칠때 사용하는 명령어
+   git switch main #main branch로 이동
+   git merge [합치고자하는 branch명] #main에서 main branch와 합치고자하는 branch를 merge 진행
+
+9. github에 원격으로 밀어올리기(push)
+   git remote add origin [원격 저장소 주소] #원격 저장소의 주소를 별칭(origin)으로 저장하기
+   git remote #remote에 정상적으로 등록되었는지 확인해 보기
+   git remote remove [origin과 같은 별칭 입력] #remote에 등록된 원격 저장소 삭제하
+   git branch -M main #기본 브랜치명을 main으로 설정
+   git push -u origin main #로컬 저장소의 커밋 내역들을 원격으로 업로드, -u는 현재 브랜치와 명시된 브랜치를 연결
+
+10. 원격으로 커밋 당겨오기(pull)
+   git pull
